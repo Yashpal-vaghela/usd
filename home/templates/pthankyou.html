@@ -1,0 +1,99 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+
+    
+{% endblock css %}
+    
+
+
+{% block body %}
+   
+<div class="page-wraper">
+     
+    
+    <!-- CONTENT START -->
+    <div class="page-content">
+
+    
+        <!-- Search Bar Home START -->
+        <div class="aon-login-wrap d-flex">
+             <div class="aon-login-left">
+                 <div class="aon-login-heading butt">
+                     <div class="aon-login-text cool">
+                         Thank You for Your Appointment Request!
+                     </div>
+                     <div class="aon-login-pic">
+                         <img src="{% static 'images/banner2/doctor.png' %}" alt=""/>
+                     </div>
+                 </div>
+            </div>
+             <div class="aon-login-right d-flex flex-wrap align-items-center">
+                 <div class="aon-login-area">
+                 <div class="col-md-12">
+                     <div class="site-logo login-sign-logo">
+                         <a href="{% url 'home:home' %}"><img src="{% static 'usdl.png' %}" style="height: 80px;" alt=""/></a>
+                     </div>
+                 </div>
+                 <div class="col-md-12">
+                        <div class="login-sign-head">
+                         <strong class="cool">Thank You for Booking</strong>
+                          <span class="cool">We have received your appointment request and will contact you shortly to confirm the details.</span>
+                         </div>
+                         
+                         <div class="thank-you-button" style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'home:home' %}" class="edu-btn" style="display: inline-block;">Back to Home <i class="icon-4"></i></a>
+</div>
+
+                </div>
+                
+                
+                      
+                 
+                
+                
+                </div>
+                 
+             </div>
+        </div>
+        <!-- Search Bar Home END --> 
+        
+        
+    </div>
+    <!-- CONTENT END -->
+
+
+ </div>
+
+
+{% endblock body %}
+    
+
+
+{% block js %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %}
+<script>
+    {% for message in messages %}
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '{{ message }}',
+        showConfirmButton: false,
+        timer: 1500
+    });
+    {% endfor %}
+</script>
+{% endif %}
+
+
+{% endblock js %}
+    

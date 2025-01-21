@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    {% load static %}
+	<!-- META -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />    
+    <meta name="description" content="" />
+    
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="{% static 'log.png' %}" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}" />
+    
+    <!-- PAGE TITLE HERE -->
+    <title>Find Ultimate Smile Designers - By ADE</title>
+    
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+    
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link  href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- FONTAWESOME STYLE SHEET -->
+    <link  href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Feather STYLE SHEET -->
+    <link href="{% static 'css/feather.css' %}" rel="stylesheet">
+
+    
+    <!-- OWL CAROUSEL STYLE SHEET -->
+    <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+    <!-- SLICK CAROUSEL STYLE SHEET -->
+    <link href="{% static 'css/slick.min.css' %}" rel="stylesheet">
+    <!-- SLICK STYLE SHEET -->
+    <link href="{% static 'css/slick-theme.css' %}" rel="stylesheet">
+    <!-- Custome scrollbar STYLE SHEET  -->
+    <link href="{% static 'css/jquery.scrollbar.css' %}" rel="stylesheet">  
+    <!-- DropZone STYLE SHEET  --> 
+    <link href="{% static 'css/dropzone.css' %}" rel="stylesheet">       
+    <!-- MAGNIFIC POPUP STYLE SHEET -->
+    <link href="{% static 'css/magnific-popup.min.css' %}" rel="stylesheet">
+    <!-- FLATICON STYLE SHEET -->
+    <link href="{% static 'css/flaticon.min.css' %}" rel="stylesheet">
+    <!-- Lc light box popup -->
+    <link href="{% static 'css/lc_lightbox.css' %}" rel="stylesheet">     
+    <!-- Price Range Slider -->
+    <link href="{% static 'css/bootstrap-slider.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap-toggle -->
+    <link href="{% static 'css/bootstrap4-toggle.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap-datatables -->
+    <link href="{% static 'css/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+    <!-- Date-picker -->
+    <link href="{% static 'css/date-picker.css' %}" rel="stylesheet">
+    <!-- Full calendar -->
+    <link href="{% static 'css/fullcalendar.min.css' %}" rel="stylesheet">   
+    <!-- MAIN STYLE SHEET -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">   
+    
+
+
+</head>
+
+<body>
+    
+<!-- LOADING AREA START ===== -->
+<!--<div class="loading-area">-->
+<!--    <div class="loading-box"></div>-->
+<!--    <div class="loading-pic">-->
+<!--        <div class="cssload-wrap">-->
+<!--            <div class="cssload-container">-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--            <span class="cssload-dots"></span>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!-- LOADING AREA  END ====== -->
+    
+	<div class="page-wraper">
+     
+       {% include 'header.html' %}
+        
+        {% block body %}
+            
+        {% endblock body %}
+            
+
+        <!-- FOOTER START -->
+        <footer class="site-footer footer-light" >
+            <!-- FOOTER NEWSLETTER START -->  
+            <div class="footer-top-newsletter">
+                <div class="container">
+                    <div class="sf-news-letter">
+                        <span>Subscribe Our Newsletter</span>
+                        <form>
+                            <div class="sf-news-l-form">
+                                <input type="text" class="form-control" placeholder="Enter Your Email">
+                                <button type="submit" class="sf-sb-btn bat">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER BLOCKS START -->  
+<div class="footer-top">
+    <div class="container">
+        <div class="row">
+            <!-- COLUMNS 1 -->
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="sf-site-link sf-widget-link">
+                    <h4 class="aon-f-title cool">About Us</h4>
+                    <p style="color:white;">Your journey to a brighter smile begins here. Our commitment is to connect you with the finest Ultimate Smile Designers in the industry.</p>
+                    <ul class="aon-socila-icon d-flex">
+                        <
+                        <li><a href="https://www.facebook.com/profile.php?id=61560203902716&mibextid=ZbWKwL" class="hover-link"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/ultimate-smile-designing-by-ade"><i class="fa fa-linkedin" class="hover-link"></i></a></li>
+                        <li><a href="https://www.instagram.com/ultimatesmiledesigningbyade?igsh=MWVuOThwb2dqeHlpMQ=="><i class="fa fa-instagram" class="hover-link"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- COLUMNS 2 -->
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="sf-site-link sf-widget-cities">
+                    <h4 class="aon-f-title cool">Quick Links</h4>
+                    <ul>
+                        <li><a href="https://advancedentalexport.com/about-us/" target="_blank" class="hover-link">About ADE</a></li>
+                        <li><a href="{% url 'home:all_usd' %}" class="hover-link">All Dentists</a></li>
+                     
+                        <li><a href="{% url 'home:contact' %}" class="hover-link">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- COLUMNS 3 -->
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="sf-site-link sf-widget-categories">
+                    <h4 class="aon-f-title cool">Important Link</h4>
+                    <ul>
+                        <li><a target="_blank" href="https://advancedentalexport.com/gentle-glow-mastering-teeth-whitening/" class="hover-link">Cosmetic Dentistry</a></li>
+                        <li><a target="_blank" href="https://advancedentalexport.com/embracing-advance-zirconia-redefining-dental-excellence-with-cutting-edge-materials/" class="hover-link">Advance Zirconia</a></li>
+                        <li><a target="_blank" href="https://advancedentalexport.com/nobelprocera/" class="hover-link">NobelProcera</a></li>
+                        <li><a target="_blank" href="https://advancedentalexport.com/exhibition-gallery/" class="hover-link">Exhibition Gallery</a></li>
+                        <li><a target="_blank" href="https://advancedentalexport.com/advanced-aligners/" class="hover-link">ADE Aligner</a></li>
+                        <li><a target="_blank" href="tel:+918469888877" class="hover-link">Request Consultation</a></li>
+                        <li><a target="_blank" href="https://ultimatesmiledesign.com/" class="hover-link">Back to Home</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- COLUMNS 4 -->
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="sf-site-link sf-widget-contact">
+                    <h4 class="aon-f-title cool">Contact Us</h4>
+                    <ul>
+                        <li><a href="tel:+918488888877" class="hover-link">+91 84 88 88 88 77</a></li>
+                        <li><a href="tel:+918469888877" class="hover-link">+91 84 69 88 88 77</a></li>
+                        
+                        <li><a href="mailto:info@advancedentalexport.com" class="hover-link">usd@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- FOOTER BLOCKS END -->
+
+            
+            <!-- FOOTER COPYRIGHT -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="aon-footer-bottom-area">
+                    	<div class="aon-foo-copyright">
+                        	<span class="cool">Copyright 2024 | Advance Dental Export. All Rights Reserved |  Developed & Managed by <a href="https://vinkdesigns.com/">Vink Designs</a></span>
+                        </div>
+                    </div>
+                </div>   
+            </div>   
+    
+        </footer>
+        <!-- FOOTER END -->
+
+        <!-- BUTTON TOP START -->
+		<button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+ 	</div>
+
+    
+    
+<!-- JAVASCRIPT  FILES ========================================= --> 
+<script  src="{% static 'js/jquery-3.6.0.min.js' %}"></script><!-- JQUERY.MIN JS -->
+<script  src="{% static 'js/popper.min.js' %}"></script><!-- POPPER.MIN JS -->
+<script  src="{% static 'js/bootstrap.min.js' %}"></script><!-- BOOTSTRAP.MIN JS -->
+    
+<script  src="{% static 'js/jquery.bootstrap-touchspin.js' %}"></script><!-- FORM JS -->
+<script  src="{% static 'js/bootstrap-slider.min.js' %}"></script><!-- BOOTSTRAP Slider --> 
+<script  src="{% static 'js/magnific-popup.min.js' %}"></script><!-- MAGNIFIC-POPUP JS -->
+<script  src="{% static 'js/waypoints.min.js' %}"></script><!-- WAYPOINTS JS -->
+<script  src="{% static 'js/counterup.min.js' %}"></script><!-- COUNTERUP JS -->
+<script  src="{% static 'js/waypoints-sticky.min.js' %}"></script><!-- STICKY HEADER -->
+<script  src="{% static 'js/isotope.pkgd.min.js' %}"></script><!-- MASONRY  -->
+<script  src="{% static 'js/owl.carousel.min.js' %}"></script><!-- OWL  SLIDER  -->
+<script  src="{% static 'js/slick.min.js' %}"></script><!-- Slick SLIDER  -->
+<script  src="{% static 'js/theia-sticky-sidebar.js' %}"></script><!-- STICKY SIDEBAR  -->
+<script  src="{% static 'js/jquery.scrollbar.min.js' %}"></script><!-- MY ACCOUNT LEFT PANEL SCROLLER -->
+<script  src="{% static 'js/dropzone.js' %}"></script><!--IMAGE UPLOAD-->  
+<script  src="{% static 'js/bootstrap4-toggle.min.js' %}"></script><!-- BOOTSTRAP TOOGLE-->
+<script  src="{% static 'js/jquery.dataTables.min.js' %}"></script><!--DATA TABLE-->
+<script  src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script><!-- DATA TABLE-->
+<script  src="{% static 'js/lc_lightbox.lite.js' %}" ></script><!-- IMAGE POPUP -->
+<script  src="{% static 'js/datepicker.min.js' %}"></script><!-- DATEPICKER -->
+<script  src="{% static 'js/fullcalendar.min.js' %}"></script><!-- DATEPICKER -->
+<script src="{% static 'js/recaptcha-api.js' %}"></script><!-- RECAPTCHA-->
+<script  src="{% static 'js/custom.js' %}"></script><!-- CUSTOM FUCTIONS  -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    var x=document.getElementById("demo");
+    function getLocation()
+        {
+            if (navigator.geolocation)
+                {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }
+                else{x.innerHTML="Geolocation is not supported by this browser.";}
+        }
+        function showPosition(position)
+            {
+                x.innerHTML="Latitude: " + position.coords.latitude + 
+                "<br>Longitude: " + position.coords.longitude;  
+                
+                if (sessionStorage.getItem('latitude') !== null) {
+                    console.log('Session data exists!');
+                } else {
+                    // Store the location data in sessionStorage
+                    sessionStorage.setItem('latitude', position.coords.latitude);
+                    sessionStorage.setItem('longitude', position.coords.longitude);
+
+
+                   
+
+                    var latitude = sessionStorage.getItem('latitude');
+                    var longitude = sessionStorage.getItem('longitude');
+
+                    if (latitude && longitude) {
+                        $.ajax({
+                            url: '/receive_location/',  // URL of your Django view
+                            type: 'POST',
+                            data: {
+                                'latitude': latitude,
+                                'longitude': longitude,
+                                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()  // CSRF token is required for POST requests
+                            },
+                            success: function(response) {
+                                console.log('Data sent to server:', response);
+                            },
+                            error: function(error) {
+                                console.log('Error sending data:', error);
+                            }
+                        });
+                    }
+
+                    
+                    setTimeout(() => {
+                        Swal.fire({
+                            title: "Customize Search Based On Location",
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: "Yes",
+                            denyButtonText: `No`
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                window.location.reload();
+                            } else if (result.isDenied) {
+                                Swal.fire("Location not updated", "", "info");
+                            }
+                        });
+
+                        
+                    }, 5000);
+                }
+
+
+            }
+
+
+        getLocation()
+    </script>
+{% block js %}
+    <!--Sweet alert after submit the request-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    {% if messages %}
+        
+        {% for ie in messages %}
+            <script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "{{ie.tags}}",
+                    title: "{{ie.message}}",
+                    showConfirmButton: false,
+                    timer: 2500
+                    });
+            </script>
+        {% endfor %}
+            
+    {% endif %}
+    
+{% endblock js %}
+    
+
+
+</body>
+
+</html>
+
+
+
+

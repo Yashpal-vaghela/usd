@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}{% endblock header %}
+{% block css %}
+
+<style>
+.circular-image {
+    width: 100px !important; /* Adjust size as needed */
+    height: 100px !important; /* Adjust size as needed */
+    border-radius: 50% !important;
+    object-fit: cover !important; /* Ensures the image covers the circle area without distortion */
+}
+</style>
+
+
+{% endblock css %}
+{% block body %}
+
+<div class="page-content">
+    {% include 'searchbar.html' %}
+    
+    <!-- Search info -->
+    <div class="aon-search-info-wrap">
+        <div class="container">
+            {% if noshow %}
+                <h3 class="aon-searchInfo-title cool">
+                    Unmatched Experience With Advance Dental Experts
+                </h3>
+                <div class="aon-searchInfo-text cool">Showing All Ultimate Smile Designers</div>
+            {% else %}
+                {% if nomatch %}
+                    <h3 class="aon-searchInfo-title">{{nomatch}} in {{city}}</h3>
+                    <div class="aon-searchInfo-text"><i class="fa fa-check"></i> Showing All Alternative Ultimate Smile Designers</div>
+                {% else %}
+                    <h3 class="aon-searchInfo-title cool">
+                        {{total}} Ultimate Smile Designers found in {{city}}
+                    </h3>
+                    <div class="aon-searchInfo-text"><i class="fa fa-check"></i> Book appointments with minimum wait-time & verified dentist details</div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <!-- Search info End -->             
+    
+    <!-- Left & right section -->
+    <div class="aon-page-jobs-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sf-listing-view-wrap">
+                        <!-- COLUMNS 1 -->
+                        {% for ie in data %}
+                            <div class="sf-listing-view">
+                                <div class="sf-listing-media-wrap">
+                                    <div class="sf-listing-media">
+                                        <a href="{% url 'home:find_dentist_d' ie.slug %}">
+    {% if ie.profile %}
+        <img src="{{ ie.profile.url }}" alt="{{ ie.name }}" class="circular-image">
+    {% else %}
+        <img src="{% static 'noimage-team.webp' %}" alt="Image" class="circular-image">
+    {% endif %}
+</a>
+
+                                        <i class="fa fa-check"></i>
+                                        <a href="{% url 'home:find_dentist_d' ie.slug %}" class="sf-doc-profile-view cool">View Profile</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="sf-listing-info">
+                                    <h3 class="cap cool">{{ie.name}} ({{ie.city}})</h3>
+                                    <div>{{ie.bio}}</div>
+                                </div>
+
+                                <div class="sf-listing-info-right">
+                                    <div class="sf-listing-con-details">
+                                        <div class="sf-listing-con-timeing">
+                                            <i class="feather-clock"></i>
+                                            <span class="{{ie.Mon}}">Mon,</span>
+                                            <span class="{{ie.Tue}}">Tue,</span> 
+                                            <span class="{{ie.Wed}}">Wed,</span> 
+                                            <span class="{{ie.Thu}}">Thu,</span> 
+                                            <span class="{{ie.Fri}}">Fri,</span>
+                                            <span class="{{ie.Sat}}">Sat,</span>
+                                            <span class="{{ie.Sun}}" style="color: green;">Sun</span>
+                                        </div>
+
+                                        <div class="sf-listing-con-address">
+                                            <i class="feather-map-pin"></i>
+                                            <p class="cap">{{ie.address}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="sf-listing-right-footer">
+                                        <a href="https://ultimatesmiledesign.com/contact/" class="site-button bat boldtext">Book Appointment</a>
+                                        <p><span>An: </span> ADE Verified Dentist</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        
+                        {% include 'pagination.html' %}
+                    </div>                                
+                </div>
+
+                {% if noshow %}
+                {% else %}
+                    <div class="col-12 text-center">
+                        <a href="{% url 'home:all_usd' %}" class="sf-doc-profile-view">View All Ultimate Smile Designers</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div> 
+    <!-- Left & right section  END -->
+</div>
+<!-- Content END-->
+
+{% endblock body %}
+{% block js %}{% endblock js %}
