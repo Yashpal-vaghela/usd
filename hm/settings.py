@@ -137,7 +137,7 @@ STATICFILES_DIRS = [
 #STATIC_ROOT = "/home/awk1gcf7eaia/public_html/ultimatesmiledesign.com/static"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT =  "/home/awk1gcf7eaia/public_html/ultimatesmiledesign.com/media"
+#MEDIA_ROOT =  "/home/awk1gcf7eaia/public_html/ultimatesmiledesign.com/media"
 #ckedior
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
