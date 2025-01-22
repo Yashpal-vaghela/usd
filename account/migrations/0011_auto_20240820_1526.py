@@ -3,7 +3,7 @@
 import ckeditor_uploader.fields
 import datetime
 from django.db import migrations, models
-from django.utils.timezone import utc
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contact',
             name='date',
-            field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(2024, 8, 20, 15, 26, 58, 323313, tzinfo=utc)),
+            field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(2024, 8, 20, 15, 26, 58, 323313, tzinfo=datetime.timezone.utc)),
             preserve_default=False,
         ),
         migrations.AddField(
