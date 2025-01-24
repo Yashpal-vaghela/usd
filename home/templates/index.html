@@ -13,21 +13,13 @@
 <!-- Owl Carousel JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-
-
 <link rel="stylesheet" href="{% static 'css/service.css' %}">
-
 <style>
     #sync1 .item {
         margin-right: 10px !important;
     }
-    
-    
-    
     /* Apply margin only for mobile view (up to 768px width) */
     
-
 </style>
 {% endblock css %}
     
@@ -63,7 +55,7 @@
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                         <!-- user msg list start-->
-                                        <form class="aon-search2-form aon-search2-form-area" action="#" method="GET"> 
+                                        <form class="aon-search2-form aon-search2-form-area" action="{% url 'home:search_all_usd' %}" method="GET"> 
                                          {% csrf_token %}
                                           <div class="aon-search2-left">
                                           <div class="aon-search2-table">
@@ -90,9 +82,9 @@
                                    </div>
                                      <div class="aon-search2-right">
                                     <div class="aon-search2-col aon-search-btn">
-                                    <a href="{% url 'account:dentist' %}">
-                                        <button class="aon-search2-btn site-button bat" type="button">Find</button>
-                                    </a>
+                                    {% comment %} <a href="{% url 'account:dentist' %}"> {% endcomment %}
+                                        <button class="aon-search2-btn site-button bat" type="submit">Find</button>
+                                    {% comment %} </a> {% endcomment %}
                                     </div>
                                     </div>
                                     </form>
@@ -363,7 +355,7 @@
                         <span class="aon-sub-title">Registration</span>
                         <h2 class="aon-title cool">Want to Schedule Your Smile Design Appointment Easily?</h2>
                         <p>Transform your smile and boost your confidence. Our network of Ultimate Smile Designers is ready to provide you with personalized dental solutions. If you're aiming for a radiant smile, our experts are here to guide you every step of the way. Should you require a more tailored approach, don't hesitate to get in touch with us.</p>
-                        <a href="{% url 'home:contact' %}" class="site-button bat">Get In Touch</a> 
+                        <a href="{% url 'account:dentist' %}" class="site-button bat">Get In Touch</a> 
                        
                     </div>
                 </div>
@@ -545,7 +537,7 @@
                             <li><i class="feather-check"></i>Connect with patients looking for top-notch smile transformations.</li>
                             <li><i class="feather-check"></i>Showcase your expertise and grow your practice with our platform.</li>
                         </ul>  
-                        <a href="https://ultimatesmiledesign.com/contact/" class="site-button bat">List Your Practice With Us</a>
+                        <a href="https://dentist.ultimatesmiledesign.com/" class="site-button bat">List Your Practice With Us</a>
                     </div>
                 </div>
                 <!--Title Section End-->
@@ -553,38 +545,9 @@
         </div>                
     </div>
 </section>
-<!-- Provider Categories END -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-
-  
-     
-
-  
-    
-
-  
-
-   
-   
-        
+<!-- Provider Categories END -->     
     <!-- Product Section -->
-<div class="aon-med-shop-area">
+    <div class="aon-med-shop-area">
         <div class="container">
             <!--Title Section Start-->
             <div class="section-head center">
@@ -594,29 +557,26 @@
             </div>
             
             <!--Title Section End-->
-        
-
             <div class="section-content">
-    <div class="wt-box wt-product-gallery on-show-slider"> 
-        <div id="sync1" class="owl-carousel owl-theme owl-btn-vertical-center m-b5">
-            {% for ie in gallery %}
-                <!--block 1-->
-                <div class="item" style="margin-right: 10px !important;">
-                    <div class="ser-shop-style1-box ser-shine-hover animate" data-animate="zoomIn" data-duration="1.0s" data-delay="0.1s" data-offset="100">
-                        <div class="ser-shop-media">
-                            <a href="{% url 'home:gallery' %}"><img src="{{ie.image.url}}" loading="lazy" alt=""></a>
-                            <span class="bedge">New</span>
-                        </div>
+                <div class="wt-box wt-product-gallery on-show-slider"> 
+                    <div id="sync1" class="owl-carousel owl-theme owl-btn-vertical-center m-b5">
+                        {% for ie in gallery %}
+                            <!--block 1-->
+                            <div class="item" style="margin-right: 10px !important;">
+                                <div class="ser-shop-style1-box ser-shine-hover animate" data-animate="zoomIn" data-duration="1.0s" data-delay="0.1s" data-offset="100">
+                                    <div class="ser-shop-media">
+                                        <a href="{% url 'home:gallery' %}"><img src="{{ie.image.url}}" loading="lazy" alt=""></a>
+                                        <span class="bedge">New</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
             </div>
 
         </div>
+    </div>
     </div>
     
     

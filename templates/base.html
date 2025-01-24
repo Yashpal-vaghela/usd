@@ -123,7 +123,7 @@
                     <h4 class="aon-f-title cool">About Us</h4>
                     <p style="color:white;">Your journey to a brighter smile begins here. Our commitment is to connect you with the finest Ultimate Smile Designers in the industry.</p>
                     <ul class="aon-socila-icon d-flex">
-                        <
+                        
                         <li><a href="https://www.facebook.com/profile.php?id=61560203902716&mibextid=ZbWKwL" class="hover-link"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="https://www.linkedin.com/company/ultimate-smile-designing-by-ade"><i class="fa fa-linkedin" class="hover-link"></i></a></li>
                         <li><a href="https://www.instagram.com/ultimatesmiledesigningbyade?igsh=MWVuOThwb2dqeHlpMQ=="><i class="fa fa-instagram" class="hover-link"></i></a></li>
@@ -152,8 +152,8 @@
                         <li><a target="_blank" href="https://advancedentalexport.com/nobelprocera/" class="hover-link">NobelProcera</a></li>
                         <li><a target="_blank" href="https://advancedentalexport.com/exhibition-gallery/" class="hover-link">Exhibition Gallery</a></li>
                         <li><a target="_blank" href="https://advancedentalexport.com/advanced-aligners/" class="hover-link">ADE Aligner</a></li>
-                        <li><a target="_blank" href="tel:+918469888877" class="hover-link">Request Consultation</a></li>
-                        <li><a target="_blank" href="https://ultimatesmiledesign.com/" class="hover-link">Back to Home</a></li>
+                        <li><a target="_blank" href="{% url 'account:dentist' %}" class="hover-link">Request Consultation</a></li>
+                        {% comment %} <li><a target="_blank" href="https://ultimatesmiledesign.com/" class="hover-link">Back to Home</a></li> {% endcomment %}
                     </ul>
                 </div>
             </div>
@@ -181,12 +181,12 @@
                 <div class="container">
                     <div class="aon-footer-bottom-area">
                     	<div class="aon-foo-copyright">
-                        	<span class="cool">Copyright 2024 | Advance Dental Export. All Rights Reserved |  Developed & Managed by <a href="https://vinkdesigns.com/">Vink Designs</a></span>
+                        	{% comment %} <span class="cool">Copyright 2024 | Advance Dental Export. All Rights Reserved |  Developed & Managed by <a href="https://vinkdesigns.com/">Vink Designs</a></span> {% endcomment %}
+                            <span class="cool">Copyright 2025 | Advance Dental Export. All Rights Resevred </span>
                         </div>
                     </div>
                 </div>   
-            </div>   
-    
+            </div>       
         </footer>
         <!-- FOOTER END -->
 
@@ -295,7 +295,7 @@
 
 
         getLocation()
-    </script>
+</script>
 {% block js %}
     <!--Sweet alert after submit the request-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
