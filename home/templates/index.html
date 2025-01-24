@@ -216,7 +216,7 @@
 
 
       <!-- Service Categories Section -->
-      <section class="aon-med-srv-cat-area bg-white">
+    <section class="aon-med-srv-cat-area bg-white">
         <div class="container">
 
             <!--Title Section Start-->
@@ -229,39 +229,39 @@
             <!--Title Section End-->
 
             <div class="section-content">
-    <div class="aon-med-srv-cat-section">
-    <ul class="justify-content-center">
-        {% for city in data1 %}
-            <li>
-                <div class="aon-med-sevices-cat aon-icon-effect">
-                    <div class="media">
-                        <span class="aon-icon">
-                            <!-- Link to search_all_usd view with city parameter -->
-                            <!--<a href="{% url 'home:search_all_usd' %}?city={{ city.id }}">-->
-                                <img src="{% static '19.png' %}" loading="lazy" alt="">
-                            <!--</a>-->
-                        </span>
-                    </div>
-                    <div class="aon-med-serices-cat-info">
-                        <h4 class="cool">
-                            <!--<a href="{% url 'home:search_all_usd' %}?city={{ city.id }}">-->
-                                {{ city.city }}
-                            </a>
-                        </h4>
-                        <p><b>{{ city.countdr }}</b> - Smile Designers</p>
-                    </div>
+                <div class="aon-med-srv-cat-section">
+                    <ul class="justify-content-center">
+                        {% for city in data1 %}
+                            <li>
+                                <div class="aon-med-sevices-cat aon-icon-effect">
+                                    <div class="media">
+                                        <span class="aon-icon">
+                                            <!-- Link to search_all_usd view with city parameter -->
+                                            <!--<a href="{% url 'home:search_all_usd' %}?city={{ city.id }}">-->
+                                                <img src="{% static '19.png' %}" loading="lazy" alt="">
+                                            <!--</a>-->
+                                        </span>
+                                    </div>
+                                    <div class="aon-med-serices-cat-info">
+                                        <h4 class="cool">
+                                            <a href="{% url 'home:search_all_usd' %}?city={{ city.id }}">
+                                                {{ city.city }}
+                                            </a>
+                                        </h4>
+                                        <p><b>{{ city.countdr }}</b> - Smile Designers</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul> 
                 </div>
-            </li>
-        {% endfor %}
-    </ul> 
-</div>
 
     <!--<div class="aon-addmore-btn-section">-->
     <!--    <a href="{% url 'home:all_usd' %}" class="aon-addplus">-->
     <!--        <i class="feather-plus"></i>-->
     <!--    </a>-->
     <!--</div>-->
-</div>
+            </div>
 
         </div>
     </section>

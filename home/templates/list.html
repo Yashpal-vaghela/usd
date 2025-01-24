@@ -55,12 +55,12 @@
                                 <div class="sf-listing-media-wrap">
                                     <div class="sf-listing-media">
                                         <a href="{% url 'home:find_dentist_d' ie.slug %}">
-    {% if ie.profile %}
-        <img src="{{ ie.profile.url }}" alt="{{ ie.name }}" class="circular-image">
-    {% else %}
-        <img src="{% static 'noimage-team.webp' %}" alt="Image" class="circular-image">
-    {% endif %}
-</a>
+                                            {% if ie.profile %}
+                                                <img src="{{ ie.profile.url }}" alt="{{ ie.name }}" class="circular-image">
+                                            {% else %}
+                                                <img src="{% static 'noimage-team.webp' %}" alt="Image" class="circular-image">
+                                            {% endif %}
+                                        </a>
 
                                         <i class="fa fa-check"></i>
                                         <a href="{% url 'home:find_dentist_d' ie.slug %}" class="sf-doc-profile-view cool">View Profile</a>

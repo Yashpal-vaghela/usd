@@ -16,11 +16,20 @@ def receive_location(request):
     if request.method == 'POST':
         latitude = request.POST.get('latitude')
         longitude = request.POST.get('longitude')
-        # Optionally, store these in the Django session or database
-        request.session['latitude'] = latitude
-        request.session['longitude'] = longitude
-        return JsonResponse({'status': 'success', 'latitude': latitude, 'longitude': longitude})
+
+        if latitude and longitude:
+            # Store latitude and longitude in session
+            request.session['latitude'] = latitude
+            request.session['longitude'] = longitude
+
+            return JsonResponse({
+                'status': 'success',
+                'latitude': latitude,
+                'longitude': longitude
+            })
+    
     return JsonResponse({'status': 'error'}, status=400)
+
 
 
 # Create your views here.
@@ -38,131 +47,100 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
-
-
 def search_all_usd(request):
-    total = 0
-    nomatch = None
-    search = None
-    q = ''
-    cc = ''
-    data1 = []
+    """
+    Handles the search functionality for dentists.
+    Allows filtering by city, search query (name), and supports pagination.
+    """
+    city_id = request.GET.get('city', '').strip()
+    query = request.GET.get('q', '').strip()
+    data1 = Dentist.objects.all().order_by('name')  # Default queryset
+    search_message = None
 
-    if request.method == 'GET': 
-        city = request.GET.get('city', '').strip()
-        q = request.GET.get('q', '').strip()
+    # Filter by city if provided
+    if city_id:
+        city = get_object_or_404(City, id=city_id)
+        data1 = data1.filter(city=city)
 
-        try:
-            if city:
-                cc = get_object_or_404(City, id=city)  # Handles case where city does not exist
-                if q:
-                    data1 = Dentist.objects.filter(Q(city=cc) | Q(name__icontains=q)).order_by('name')
-                else:
-                    data1 = Dentist.objects.filter(city=cc).order_by('name')
-            elif q:
-                data1 = Dentist.objects.filter(name__icontains=q).order_by('name')
-            else:
-                data1 = Dentist.objects.all().order_by('name')
-        
-        except City.DoesNotExist:
-            search = 'City not found'
-            data1 = Dentist.objects.all().order_by('name')
-        
-        if not data1.exists():
-            search = 'No Ultimate Designers Found Based On Your Query'
-            data1 = Dentist.objects.all().order_by('name')
-        
-        # Pagination
-        paginator = Paginator(data1, 12)
-        page = request.GET.get('page', 1)
-        
-        try:
-            data = paginator.page(page)
-        except PageNotAnInteger:
-            data = paginator.page(1)
-        except EmptyPage:
-            data = paginator.page(paginator.num_pages)
-    
-        context = {
-            'data': data,
-            'noshow': 'noshow',
-            'search': search,
-            'q': q,
-            'cc': cc,
-        }
-        return render(request, 'list.html', context)
+    # Filter by search query if provided
+    if query:
+        data1 = data1.filter(name__icontains=query)
 
+    # Check if the query returned results
+    if not data1.exists():
+        search_message = "No Ultimate Designers Found Based On Your Query."
 
-def all_usd(request):
-    total = 0
-    city = request.session.get('city')
-    nomatch = None
-   
-    data1 = Dentist.objects.all().order_by('name')
+    # Pagination
+    paginator = Paginator(data1, 12)  # 12 dentists per page
     page = request.GET.get('page', 1)
 
-    
-    paginator = Paginator(data1, 32)
     try:
         data = paginator.page(page)
     except PageNotAnInteger:
         data = paginator.page(1)
     except EmptyPage:
         data = paginator.page(paginator.num_pages)
-    
+
     context = {
-        'data':data,
-        'noshow':'noshow'
-        
+        'data': data,
+        'search_message': search_message,
+        'query': query,
+        'city': city_id,
     }
     return render(request, 'list.html', context)
 
+def all_usd(request):
+    """
+    Displays all dentists without filtering, with pagination.
+    """
+    data1 = Dentist.objects.all().order_by('name')
+    paginator = Paginator(data1, 32)  # 32 dentists per page
+    page = request.GET.get('page', 1)
 
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+
+    context = {
+        'data': data,
+    }
+    return render(request, 'list.html', context)
 
 def find_dentist(request):
-    total = 0
-    city = request.session.get('city')
-    nomatch = None
-    if city:
+    """
+    Displays dentists for the city stored in the session.
+    If no city is found in the session, shows all dentists.
+    """
+    city_name = request.session.get('city')
+    data1 = Dentist.objects.all().order_by('name')  # Default queryset
+    search_message = None
+
+    if city_name:
         try:
-            cc = City.objects.get(city=city)
-            data1 = Dentist.objects.filter(city=cc).order_by('name')
-        except:
-            data1 = None
-        
-        
-        if data1:
-            total = Dentist.objects.filter(city=cc).count()
-        else:
-            nomatch = 'No Ultimate Designers In'
+            city = City.objects.get(city=city_name)
+            data1 = Dentist.objects.filter(city=city).order_by('name')
+        except City.DoesNotExist:
+            search_message = f"No Ultimate Designers Found in {city_name}."
             data1 = Dentist.objects.all().order_by('name')
-        
-        page = request.GET.get('page', 1)
-        paginator = Paginator(data1, 12)
-        try:
-            data = paginator.page(page)
-        except PageNotAnInteger:
-            data = paginator.page(1)
-        except EmptyPage:
-            data = paginator.page(paginator.num_pages)
 
-    else:
-        data1 = Dentist.objects.all().order_by('name')
-        page = request.GET.get('page', 1)
+    # Pagination
+    paginator = Paginator(data1, 12)  # 12 dentists per page
+    page = request.GET.get('page', 1)
 
-        
-        paginator = Paginator(data1, 12)
-        try:
-            data = paginator.page(page)
-        except PageNotAnInteger:
-            data = paginator.page(1)
-        except EmptyPage:
-            data = paginator.page(paginator.num_pages)
-    # print(nomatch)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+
     context = {
-        'data':data,
-        'nomatch':nomatch,
-        'total':total,
+        'data': data,
+        'search_message': search_message,
+        'city_name': city_name,
     }
     return render(request, 'list.html', context)
 
