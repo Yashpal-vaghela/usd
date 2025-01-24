@@ -10,11 +10,9 @@ urlpatterns = [
     path('blogs/<str:pk>/', views.blogsd, name='blogsd'),
     path('contact/', views.contact, name='contact'),
     path('thank-you/', views.thankyou, name='thankyou'),
-
-
+    path('sitemap.xml/',views.sitemap, name='sitemap'),
+    path('robots.txt/',views.robots, name='robots'),
     path('all-usd/', views.all_usd, name='all_usd'),
     path('search-all-usd/', views.search_all_usd, name='search_all_usd'),
-
-
     path('receive_location/', views.receive_location, name='receive_location'),
 ] 
