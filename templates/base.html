@@ -224,78 +224,92 @@
 <script  src="{% static 'js/custom.js' %}"></script><!-- CUSTOM FUCTIONS  -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    var x=document.getElementById("demo");
-    function getLocation()
-        {
-            if (navigator.geolocation)
-                {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                }
-                else{x.innerHTML="Geolocation is not supported by this browser.";}
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
         }
-        function showPosition(position)
-            {
-                x.innerHTML="Latitude: " + position.coords.latitude + 
-                "<br>Longitude: " + position.coords.longitude;  
-                
-                if (sessionStorage.getItem('latitude') !== null) {
-                    console.log('Session data exists!');
-                } else {
-                    // Store the location data in sessionStorage
-                    sessionStorage.setItem('latitude', position.coords.latitude);
-                    sessionStorage.setItem('longitude', position.coords.longitude);
+    }
 
+    function showPosition(position) {
+        x.innerHTML =
+            "Latitude: " + position.coords.latitude + 
+            "<br>Longitude: " + position.coords.longitude;
 
-                   
+        if (sessionStorage.getItem("latitude") !== null) {
+            console.log("Session data exists!");
+        } else {
+            // Store latitude and longitude in sessionStorage
+            sessionStorage.setItem("latitude", position.coords.latitude);
+            sessionStorage.setItem("longitude", position.coords.longitude);
 
-                    var latitude = sessionStorage.getItem('latitude');
-                    var longitude = sessionStorage.getItem('longitude');
+            var latitude = sessionStorage.getItem("latitude");
+            var longitude = sessionStorage.getItem("longitude");
 
-                    if (latitude && longitude) {
-                        $.ajax({
-                            url: '/receive_location/',  // URL of your Django view
-                            type: 'POST',
-                            data: {
-                                'latitude': latitude,
-                                'longitude': longitude,
-                                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()  // CSRF token is required for POST requests
-                            },
-                            success: function(response) {
-                                console.log('Data sent to server:', response);
-                            },
-                            error: function(error) {
-                                console.log('Error sending data:', error);
-                            }
-                        });
-                    }
+            if (latitude && longitude) {
+                // Send the location data to the server
+                $.ajax({
+                    url: "/receive_location/", // URL of your Django view
+                    type: "POST",
+                    data: {
+                        latitude: latitude,
+                        longitude: longitude,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(), // CSRF token is required for POST requests
+                    },
+                    success: function (response) {
+                        console.log("Data sent to server:", response);
 
-                    
-                    setTimeout(() => {
-                        Swal.fire({
-                            title: "Customize Search Based On Location",
-                            showDenyButton: true,
-                            showCancelButton: false,
-                            confirmButtonText: "Yes",
-                            denyButtonText: `No`
-                            }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                window.location.reload();
-                            } else if (result.isDenied) {
-                                Swal.fire("Location not updated", "", "info");
-                            }
-                        });
+                        // Check if the server returned city and state
+                        if (response.status === "success") {
+                            const city = response.city || "unknown";
+                            const state = response.state || "unknown";
 
-                        
-                    }, 5000);
-                }
+                            // Store city and state in sessionStorage or localStorage
+                            sessionStorage.setItem("city", city);
+                            sessionStorage.setItem("state", state);
 
+                            // Optionally store in localStorage
+                            localStorage.setItem("city", city);
+                            localStorage.setItem("state", state);
 
+                            console.log("City and State saved:", { city, state });
+                        } else {
+                            console.error("Failed to retrieve city and state.");
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error sending data:", error);
+                    },
+                });
             }
 
+            // Display confirmation dialog after storing location
+            setTimeout(() => {
+                Swal.fire({
+                    title: "Customize Search Based On Location",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Yes",
+                    denyButtonText: "No",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    } else if (result.isDenied) {
+                        Swal.fire("Location not updated", "", "info");
+                    }
+                });
+            }, 5000);
+        }
+    }
 
-        getLocation()
+    getLocation();
 </script>
+
+
+
 {% block js %}
     <!--Sweet alert after submit the request-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

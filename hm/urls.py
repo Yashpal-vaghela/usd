@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from . import pre
 # from exam import views as auth_view
 admin.site.site_header = 'Dashboard'                    # default: "Django Administration"
 admin.site.index_title = 'Admin Panel'                 # default: "Site administration"
@@ -12,7 +13,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('account/', include('account.urls')),
     
-    
+    path('get-location-info/', pre.get_location_info, name='get_location_info'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     # password reset
     path('reset_password', auth_views.PasswordResetView.as_view(template_name='reset.html'), name='reset_password'),

@@ -10,6 +10,7 @@ from account.models import *
 from account.forms import ContactForm
 from django.db.models import Q
 from django.core.paginator import Paginator
+from hm.pre import get_location_info
 
 @csrf_exempt  # This bypasses CSRF protection for demonstration purposes only
 def receive_location(request):
@@ -22,10 +23,15 @@ def receive_location(request):
             request.session['latitude'] = latitude
             request.session['longitude'] = longitude
 
+            context = get_location_info(request)
+            city = context.get('city', 'unknown')
+            state = context.get('state', 'unknown')
             return JsonResponse({
                 'status': 'success',
                 'latitude': latitude,
-                'longitude': longitude
+                'longitude': longitude,
+                'city': city,
+                'state': state
             })
     
     return JsonResponse({'status': 'error'}, status=400)
@@ -50,15 +56,28 @@ def home(request):
 def search_all_usd(request):
     """
     Handles the search functionality for dentists.
-    Allows filtering by city, search query (name), and supports pagination.
+    Allows filtering by city (from request or session) and search query (name).
+    Supports pagination.
     """
     city_id = request.GET.get('city', '').strip()
     query = request.GET.get('q', '').strip()
     data1 = Dentist.objects.all().order_by('name')  # Default queryset
     search_message = None
 
-    # Filter by city if provided
-    if city_id:
+    # Check for city in request; if not found, check session
+    if not city_id:
+        city_name = request.session.get('city')
+        if city_name:
+            try:
+                city = City.objects.get(city=city_name)
+                data1 = data1.filter(city=city)
+            except City.DoesNotExist:
+                search_message = f"No Ultimate Designers Found in {city_name}."
+        else:
+            search_message = "No city selected."
+
+    else:
+        # Filter by city from request
         city = get_object_or_404(City, id=city_id)
         data1 = data1.filter(city=city)
 
@@ -85,15 +104,25 @@ def search_all_usd(request):
         'data': data,
         'search_message': search_message,
         'query': query,
-        'city': city_id,
+        'city': city_id or request.session.get('city'),
     }
     return render(request, 'list.html', context)
 
 def all_usd(request):
     """
     Displays all dentists without filtering, with pagination.
+    If a city exists in the session, filters dentists by that city.
     """
-    data1 = Dentist.objects.all().order_by('name')
+    city_name = request.session.get('city', '')
+    data1 = Dentist.objects.all().order_by('name')  # Default queryset
+
+    if city_name:
+        try:
+            city = City.objects.get(city=city_name)
+            data1 = data1.filter(city=city)
+        except City.DoesNotExist:
+            pass  # If city doesn't exist, show all dentists
+
     paginator = Paginator(data1, 32)  # 32 dentists per page
     page = request.GET.get('page', 1)
 
@@ -114,7 +143,7 @@ def find_dentist(request):
     Displays dentists for the city stored in the session.
     If no city is found in the session, shows all dentists.
     """
-    city_name = request.session.get('city')
+    city_name = request.GET.get('city') or request.session.get('city', '')
     data1 = Dentist.objects.all().order_by('name')  # Default queryset
     search_message = None
 

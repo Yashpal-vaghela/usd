@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="sf-listing-right-footer">
-                                        <a href="https://ultimatesmiledesign.com/contact/" class="site-button bat boldtext">Book Appointment</a>
+                                        <a href="{% url 'account:dentist' %}" class="site-button bat boldtext">Book Appointment</a>
                                         <p><span>An: </span> ADE Verified Dentist</p>
                                     </div>
                                 </div>
@@ -102,12 +102,12 @@
                     </div>                                
                 </div>
 
-                {% if noshow %}
+                {% comment %} {% if noshow %}
                 {% else %}
                     <div class="col-12 text-center">
                         <a href="{% url 'home:all_usd' %}" class="sf-doc-profile-view">View All Ultimate Smile Designers</a>
                     </div>
-                {% endif %}
+                {% endif %} {% endcomment %}
             </div>
         </div>
     </div> 
